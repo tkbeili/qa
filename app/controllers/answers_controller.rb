@@ -9,10 +9,14 @@ class AnswersController < QuestionsController
 
   def create
     @answer = current_question.answers.new(answer_params)
-    if @answer.save
-      redirect_to @answer.question, notice: "Answer added correctly."
-    else
-      redirect_to @answer.question, alert: "Sorry answer could not be added."
+    respond_to do |format|
+      if @answer.save
+        format.js   { render }
+        format.html { redirect_to @answer.question, notice: "Answer added correctly." }
+      else
+        format.js   { render }
+        format.html { redirect_to @answer.question, alert: "Sorry answer could not be added." }
+      end
     end
   end
 

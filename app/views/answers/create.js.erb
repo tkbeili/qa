@@ -1,0 +1,7 @@
+$(".answer_creations_errors").html("");
+<% if @answer.errors.any? %>
+  $(".answer_creations_errors").html("<%= @answer.errors.full_messages.join(" ") %>");
+<% else %>
+  $(".answers").append("<%= j render 'answer', answer: @answer %>");
+  $("#answer_body").val("");
+<% end %>

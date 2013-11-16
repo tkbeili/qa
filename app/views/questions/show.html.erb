@@ -14,15 +14,14 @@
 <hr>
 
 Add new Answer
-<%= form_for [@question, Answer.new] do |f| %>
+<div class="answer_creations_errors"></div>
+<%= form_for [@question, Answer.new], remote: true do |f| %>
   <%= f.text_area :body %>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
 
 <h3> Answers </h3>
 <hr>
-<% @question.answers.each do |answer| %>
-  <div class="well">
-    <%= answer.body %>
-  </div>
-<% end %>
+<div class="answers">
+  <%= render @question.answers %>
+</div>
